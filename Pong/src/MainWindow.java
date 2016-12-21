@@ -23,8 +23,8 @@ public class MainWindow extends JFrame {
 	public MainWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 598, 414);
-		setSize(600, 600);
-		setResizable(false);
+		//setSize(600, 600);
+		//setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -37,13 +37,16 @@ public class MainWindow extends JFrame {
 		scoreLabel.setFont(new Font("Lucida Sans", Font.PLAIN, 30));
 		contentPane.add(scoreLabel, BorderLayout.NORTH);
 		
-		gameBoard = new JPanel();
+		gameBoard = new GameBoard((JFrame) this);
 		contentPane.add(gameBoard, BorderLayout.CENTER);
 		
 		btnNewButton = new JButton("Reset game");
 		btnNewButton.setFont(new Font("Lucida Console", Font.PLAIN, 14));
 		contentPane.add(btnNewButton, BorderLayout.SOUTH);
+		
+		pack();
 	}
+
 
 	/**
 	 * Sets the text displayed on the score board.
@@ -54,4 +57,6 @@ public class MainWindow extends JFrame {
 		this.score = "Score " + score1 + " - " + score2;
 		this.scoreLabel.setText(score);
 	}
+	
+	
 }

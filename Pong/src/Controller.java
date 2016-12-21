@@ -1,5 +1,7 @@
 import java.awt.EventQueue;
 
+import javax.swing.Timer;
+
 public class Controller {
 
 	private Ball ball;
@@ -13,8 +15,7 @@ public class Controller {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		
-		
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
