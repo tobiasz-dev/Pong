@@ -54,8 +54,21 @@ public class Ball{
 	 * Changes the position of ball by getting into account acceleration
 	 */
 	public void move(){
+		
 		this.x += xa;
 		this.y += ya;
+		
+	}
+	
+	public void wallReflection(int boardWidth, int boardHeight){
+		
+		 if (this.x + this.WIDTH >= boardWidth) this.xa = - 2;
+		 if (this.x <= 0) this.xa = 2;
+		 if (this.y + this.HEIGHT >= boardHeight) this.ya = -2;
+		 if (this.y <= 0) this.ya = 2;
+		
+
+		
 	}
 	
 	public void paint(Graphics g){

@@ -33,6 +33,7 @@ public class GameBoard extends JPanel implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent e){
+		ball.wallReflection(this.PANEL_WIDTH, this.PANEL_HEIGHT);
 		ball.move();
 		repaint();
 	}
