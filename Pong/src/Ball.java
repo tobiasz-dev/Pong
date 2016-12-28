@@ -60,6 +60,11 @@ public class Ball{
 		
 	}
 	
+	/**
+	 * changes ball movement if ball hits any of walls
+	 * @param boardWidth width of board (play field)
+	 * @param boardHeight height of board (play field)
+	 */
 	public void wallReflection(int boardWidth, int boardHeight){
 		
 		 if (this.x + this.WIDTH >= boardWidth) this.xa = - 2;
@@ -71,6 +76,11 @@ public class Ball{
 		
 	}
 	
+	
+	/**
+	 * paints the ball
+	 * @param g graphics component
+	 */
 	public void paint(Graphics g){
        
 		g.fillRect(x, y, WIDTH, HEIGHT);
