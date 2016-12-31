@@ -4,6 +4,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -42,6 +45,15 @@ public class MainWindow extends JFrame {
 		
 		btnNewButton = new JButton("Reset game");
 		btnNewButton.setFont(new Font("Lucida Console", Font.PLAIN, 14));
+		btnNewButton.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				((GameBoard) gameBoard).resetGame();
+				
+			}
+			
+		});
 		contentPane.add(btnNewButton, BorderLayout.SOUTH);
 		
 		pack();

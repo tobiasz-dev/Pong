@@ -1,19 +1,17 @@
 import java.awt.Graphics;
-
+import java.awt.Rectangle;
 
 import javax.swing.JFrame;
 
 public class PongRacket {
-	private final int RACKET_WIDTH = 20;
-	private final int RACKET_HEIGHT = 100;
-	private final int MOVEMENT_SPEED = 10;
-	private final static int MOVE_UP = 1;
-	private final static int MOVE_DOWN = -1;
-	private final static int DONT_MOVE = 0;
+	public final static int RACKET_WIDTH = 20;
+	public final static int RACKET_HEIGHT = 100;
+	private final int MOVEMENT_SPEED = 4;
 	private int x;
 	private int y;
 	private int upKey;
 	private int downKey;
+	private int ya;
 	
 
 	/**
@@ -36,10 +34,10 @@ public class PongRacket {
 	 * 
 	 * @param direction
 	 */
-	public void move(int direction){
-		if(direction == this.MOVE_UP) this.y += this.MOVEMENT_SPEED;
-		else if (direction == this.MOVE_DOWN) this.y -= this.MOVEMENT_SPEED;
-		//else if(direction == this.DONT_MOVE) this
+	public void move(int maxHeight){
+		if(y + ya > 0 && y + ya + this.RACKET_HEIGHT < maxHeight){
+			y += ya;
+		}
 	}
 	
 	/**
@@ -55,11 +53,42 @@ public class PongRacket {
 	 * @param key key being pressed
 	 */
 	public void keyPressed(int key){
-		if (key == this.upKey) this.move(this.MOVE_UP);
-		else if (key == this.downKey) this.move(MOVE_DOWN);
-		else this.move(this.DONT_MOVE);
+		if (key == this.upKey) ya = - this.MOVEMENT_SPEED;
+		else if (key == this.downKey) ya = this.MOVEMENT_SPEED;
+	
 
 	}
+	
+	public void keyReleased(int key) {
+		if (key == this.upKey || key == this.downKey){
+			this.ya = 0;
+		}
+		
+	}
+	
+	public int getX(){
+		return this.x;
+	}
+	
+	public int getY(){
+		return this.y;
+	}
+	
+	public int getHeight(){
+		return this.RACKET_HEIGHT;
+	}
+	
+	public int getWidth(){
+		return this.RACKET_WIDTH;
+	}
+	
+	public Rectangle getBounds(){
+		return new Rectangle(this.x, this.y, this.RACKET_WIDTH, this.RACKET_HEIGHT);
+		
+	}
+
+
+
 
 	
 }

@@ -1,21 +1,30 @@
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
+import java.util.Random;
 
 public class Ball{
 	private static final int WIDTH = 30, HEIGHT = 30;
 	private int x;
 	private int y;
+	private int startX;
+	private int startY;
 	private int xa = 2;
 	private int ya = 2;
+	private GameBoard gameBoard;
 	
 	/**
 	 * Constructor
 	 * @param x initial x position
 	 * @param y initial y position
 	 */
-	public Ball(int x, int y){
+	public Ball(int x, int y, GameBoard gb){
 		this.x = x;
 		this.y = y;
+		this.startX = x;
+		this.startY = y;
+		this.gameBoard = gb;
 	}
 	
 	/**
@@ -67,15 +76,57 @@ public class Ball{
 	 */
 	public void wallReflection(int boardWidth, int boardHeight){
 		
-		 if (this.x + this.WIDTH >= boardWidth) this.xa = - 2;
-		 if (this.x <= 0) this.xa = 2;
-		 if (this.y + this.HEIGHT >= boardHeight) this.ya = -2;
-		 if (this.y <= 0) this.ya = 2;
-		
+		 if (this.x + this.WIDTH >= boardWidth){
+			 //player 1 scores
+			 gameBoard.increaseScore(1);
+			 this.resetBall(1);
+			 
+		 }
+		 if (this.x <= 0){
+			 //player 2 scores 
+			 gameBoard.increaseScore(2);
+			 this.resetBall(2);
+		 }
+		 if (this.y + this.HEIGHT >= boardHeight) this.ya = - this.ya;
+		 if (this.y <= 0) this.ya = -this.ya;
 
-		
 	}
 	
+	public void racketCollision(PongRacket racket){
+		if(this.collides(racket)){
+				this.xa = - this.xa;			
+		}	
+			
+	}
+	
+	public void resetBall(int player){
+		this.x = this.startX;
+		this.y = this.startY;
+		if (player == 1){
+			this.xa = -2;
+		}
+		else{
+			this.xa = 2;
+		}
+		Random generator = new Random(); 
+		if(generator.nextInt(2) == 0){
+			this.ya = -2;
+		}
+		else{
+			this.ya = 2;
+		}
+	}
+	
+	private boolean collides(PongRacket racket){
+		if(this.getBounds().intersects(racket.getBounds())){
+			return true;
+		}
+		
+		return false;
+	}
+	public Rectangle getBounds(){
+		return new Rectangle(this.x, this.y, this.WIDTH, this.HEIGHT);
+	}
 	
 	/**
 	 * paints the ball
@@ -84,5 +135,6 @@ public class Ball{
 	public void paint(Graphics g){
        
 		g.fillRect(x, y, WIDTH, HEIGHT);
+		
 	}
 }
